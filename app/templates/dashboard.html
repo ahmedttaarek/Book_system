@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Dashboard</h2>
+<p>Welcome, {{ current_user.username }}!</p>
+<a href="{{ url_for('main.add_book') }}">Add New Book</a>
+<h3>Your Books</h3>
+<ul>
+    {% for book in current_user.books %}
+        <li>
+            {{ book.title }} by {{ book.author }}
+            {% if book.image %}
+                <img src="data:image/jpeg;base64,{{ book.image | b64encode }}" alt="Book Image" width="100">
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
